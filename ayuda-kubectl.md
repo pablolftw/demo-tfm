@@ -38,3 +38,13 @@ Expone el puerto de ArgoCD para que sea accesible desde fuera del cluster
 ```
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
+
+
+## Vagrant
+túnel ssh
+```
+vagrant ssh -- -L 8080:127.0.0.1:8080 -L 3000:127.0.0.1:3000 -L 5000:127.0.0.1:5000
+```
+8080 -> ArgoCD
+3000 -> Gitea
+5000 -> Checkmk
