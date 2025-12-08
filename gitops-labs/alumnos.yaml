@@ -17,6 +17,13 @@
   check-http:
     - http://prometheus-service.alumno-maria.svc.cluster.local:9090
 
+- nombre: alumno-carlos
+  id: "003"
+  apps:
+    - mysql
+    - mongodb
+  check-http: []
+
 # - nombre: alumno-pedro
 #   id: "003"
 #   apps: []

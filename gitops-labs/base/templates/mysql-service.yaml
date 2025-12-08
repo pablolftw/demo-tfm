@@ -1,0 +1,15 @@
+{{- if has "mysql" .Values.apps }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  namespace: {{ .Values.nombre }}
+  labels:
+    app: mysql
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: mysql
+  clusterIP: None
+{{- end }}

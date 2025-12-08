@@ -1,0 +1,15 @@
+{{- if has "mongodb" .Values.apps }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+  namespace: {{ .Values.nombre }}
+  labels:
+    app: mongodb
+spec:
+  ports:
+    - port: 27017
+  selector:
+    app: mongodb
+  clusterIP: None
+{{- end }}
