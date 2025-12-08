@@ -1,0 +1,15 @@
+{{- if has "postgresql" .Values.apps }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+  namespace: {{ .Values.nombre }}
+  labels:
+    app: postgres
+spec:
+  ports:
+    - port: 5432
+  selector:
+    app: postgres
+  clusterIP: None
+{{- end }}

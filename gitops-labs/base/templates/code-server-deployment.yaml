@@ -1,0 +1,42 @@
+{{- if has "code-server" .Values.apps }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: code-server
+  namespace: {{ .Values.nombre }}
+  labels:
+    app: code-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: code-server
+  template:
+    metadata:
+      labels:
+        app: code-server
+    spec:
+      containers:
+        - name: code-server
+          image: linuxserver/code-server:latest
+          ports:
+            - containerPort: 8443
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: "Europe/Madrid"
+            - name: PASSWORD # Optional: remove auth for labs if desired, but linuxserver image uses this
+              value: "password" # TODO: usage of secret is better
+            - name: SUDO_PASSWORD
+              value: "password"
+          volumeMounts:
+            - name: workspace
+              mountPath: /config/workspace
+      volumes:
+        - name: workspace
+          persistentVolumeClaim:
+            claimName: code-server-pvc
+{{- end }}
